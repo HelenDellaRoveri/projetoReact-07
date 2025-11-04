@@ -1,6 +1,6 @@
 import React from 'react';
-import 'boorstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 import './App.css';
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -47,13 +47,25 @@ function App(){
               />
 
               <Route
-                
+                path="/users"
+                element={
+                  <PrivateRoute>
+                    <UserCrud/>
+                  </PrivateRoute>
+                }
               />
-
+              {/* Redirecionamento padrão */}
+                <Route path="*" element={<Navigate to="/login" replace/>}/>
             </Routes>
           </main>
+
+          <PrivateRoute>
+            < Footer/>
+          </PrivateRoute>
         </div>
       </Router>
     </AuthProvider>
-  )
+  );
 }
+
+export default App;
